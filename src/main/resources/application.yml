@@ -1,35 +1,8 @@
 server:
-  port: 8085
+  port: 8083
 spring:
   application:
     name: notification-service
-
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-  instance:
-    preferIpAddress: true
-  registerWithEureka: true
-  fetchRegistry: true
-
-management:
-  info:
-    env:
-      enabled: true
-  endpoints:
-    endpoints:
-      web:
-        exposure:
-          include: '*'
-    endpoint:
-      exposure:
-        include: "*"
-      health:
-        show-details: always
-      beans:
-        enabled: true
 
 info:
   application:

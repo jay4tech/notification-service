@@ -1,8 +1,7 @@
 package com.example.notification.util;
 
-import com.example.notification.model.Customer;
 import com.example.notification.model.EmailDetails;
-import com.example.notification.model.Reservation;
+import com.example.notification.model.Order;
 
 public class EmailHelper {
 
@@ -11,22 +10,12 @@ public class EmailHelper {
         return true;
     }
 
-    public static EmailDetails prepareEmailDetails(Customer customerDetails){
+    public static EmailDetails prepareEmailDetails(Order order){
         EmailDetails emailDetails = new EmailDetails();
-        emailDetails.setReceiverEmail(customerDetails.getEmail());
+        emailDetails.setReceiverEmail(order.getEmail());
         // Modify the email body on requirement
-        String emailBody = "Hey "+customerDetails.getName() +" Happy to onboard you";
-        emailDetails.setEmailSubject("Welcome onboard !");
-        emailDetails.setEmailBody(emailBody);
-        return emailDetails;
-    }
-
-    public static EmailDetails prepareEmailDetails(Reservation reservationDetails, Customer customerDetails){
-        EmailDetails emailDetails = new EmailDetails();
-        emailDetails.setReceiverEmail(customerDetails.getEmail());
-        // Modify the email body on requirement
-        String emailBody = "Hey "+customerDetails.getName() + " Here are your reservation details: "+ reservationDetails ;
-        emailDetails.setEmailSubject("Reservation Details !");
+        String emailBody = "Hey "+order.getProductId() +" payment is pending please proceed";
+        emailDetails.setEmailSubject("Payment Details !");
         emailDetails.setEmailBody(emailBody);
         return emailDetails;
     }
