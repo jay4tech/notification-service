@@ -18,7 +18,7 @@ public class UtilityMapper {
             return null;
         }
     }
-    public static <T> String modelToString(T object) {
+    public static String modelToString(Object object) {
 
         try {
             return getMapper().writeValueAsString(object);
