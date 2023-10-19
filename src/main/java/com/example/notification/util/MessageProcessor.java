@@ -3,7 +3,9 @@ package com.example.notification.util;
 import com.example.notification.client.AccountTransactionClient;
 import com.example.notification.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MessageProcessor {
 
     @Autowired
@@ -11,11 +13,13 @@ public class MessageProcessor {
 
     public boolean sendEmail(EmailDetails emailDetails) {
         // Send email and return the response;
+        System.out.println("Email Sent :"+emailDetails);
         return true;
     }
 
     private boolean sendSMS(SMSDetails smsDetails) {
         // Send sms and return response
+        System.out.println("SMS Sent :"+smsDetails);
         return true;
     }
 
@@ -53,6 +57,26 @@ public class MessageProcessor {
         }
         emailDetails.setEmailBody(emailBody);
         return emailDetails;
+    }
+
+    public void processMessage(AccountDetails accountDetails) {
+        sendEmail(prepareEmail(accountDetails));
+        sendSMS(prepareSMS(accountDetails));
+    }
+    public EmailDetails prepareEmail(AccountDetails accountDetails) {
+        EmailDetails emailDetails = new EmailDetails();
+        String emailBody = "Hey " + accountDetails.getName() + " your account has been created";
+        emailDetails.setEmailSubject("Welcome "+accountDetails.getName());
+        emailDetails.setEmailBody(emailBody);
+        return emailDetails;
+    }
+
+    private SMSDetails prepareSMS(AccountDetails accountDetails) {
+        SMSDetails smsDetails = new SMSDetails();
+        String smsBody = "Hey " + accountDetails.getName() + " your account has been created";
+        smsDetails.setSMSSubject("Welcome "+accountDetails.getName());
+        smsDetails.setSMSBody(smsBody);
+        return smsDetails;
     }
 
 }
